@@ -1,17 +1,20 @@
 import {isAdmin} from '../ultils.js'
 import multer from 'multer';
 import express from 'express';
-import path from 'path';
-import multerConfig from '../config/upload.js'
+import multerConfig from '../config/multerConfig.js'
 
 const uploadRouter = express.Router();
 
-const upload = multer(multerConfig);
+uploadRouter.post(
+    '/',
+    multer(multerConfig(true)).single('image'),
+    async (req, res) => {
+        console.log(process.env.secretAccessKey)
+        const {location, filename} = req.file
+        const localUrl = `http://localhost:5000/uploads/${filename}`
 
-uploadRouter.post('/', upload.single('image'), (req, res) => {
-    const filename = req.file.filename
-    const path = `/uploads/${filename}`
-    return res.json(path)
-});
+        res.send(location || localUrl)
+    }
+)
 
 export default uploadRouter;

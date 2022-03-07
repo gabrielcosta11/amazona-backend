@@ -2,7 +2,7 @@ import express from "express";
 import data from "../data.js";
 import Product from '../models/productModel.js'
 import expressAsyncHandler from 'express-async-handler'
-import {isAuth, isAdmin} from '../ultils.js'
+import {isAuth, isAdmin, deleteObjectS3} from '../ultils.js'
 
 
 const productRouter = express.Router();
@@ -78,6 +78,7 @@ productRouter.delete(
     '/:id',
     isAuth,
     isAdmin,
+    deleteObjectS3,
     expressAsyncHandler(async(req, res) => {
         const product = await Product.findById(req.params.id)
         if(product) {

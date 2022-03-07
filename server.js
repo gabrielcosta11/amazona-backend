@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 import freightCalcRouter from './routers/freightCalcRouter.js';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import orderRouter from './routers/orderRouter.js';
 import mercadopago from 'mercadopago'
 import mercadoPagoCheckoutRouter from './routers/MercadoPagoCheckout.js';
@@ -13,6 +13,7 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
+const dest = path.resolve(process.cwd(), 'tmp', 'uploads')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
@@ -32,7 +33,7 @@ app.use('/api/freight', freightCalcRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/checkout', mercadoPagoCheckoutRouter);
 app.use('/api/uploads', uploadRouter);
-app.use('/uploads', express.static(path.join(toString(process.cwd()), '..', '..', 'frontend', 'public', 'uploads')))
+app.use('/uploads', express.static(path.resolve(process.cwd(), 'tmp', 'uploads')))
 
 app.get('/', (req, res) => {
     res.send('Server is Running!')

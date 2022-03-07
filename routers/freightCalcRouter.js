@@ -21,6 +21,9 @@ freightCalcRouter.post('/', async (req, res) => {
     const formatedDestination = formatedCep(destination)
 
     const {data} = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${formatedOrigin}&destinations=${formatedDestination}&key=${process.env.API_KEY}`)
+
+    console.log(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${formatedOrigin}&destinations=${formatedDestination}&key=${process.env.API_KEY}`)
+
     const {elements} = data.rows[0]
     const {distance} = elements[0]
 
