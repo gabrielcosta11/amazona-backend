@@ -19,10 +19,16 @@ const dest = path.resolve(process.cwd(), 'tmp', 'uploads')
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-mongoose.connect(process.env.MONGO_CNSTRING || 'mongodb://localhost/amazona', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+
+
+try {
+    mongoose.connect(process.env.MONGO_CNSTRING || 'mongodb://localhost/amazona', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+} catch (error) {
+    console.log(error)
+}
 
 
 /* const client = new MongoClient(process.env.MONGO_CNSTRING)
