@@ -6,7 +6,7 @@ import freightCalcRouter from './routers/freightCalcRouter.js';
 import dotenv from 'dotenv';
 import orderRouter from './routers/orderRouter.js';
 import mercadopago from 'mercadopago'
-import mercadoPagoCheckoutRouter from './routers/MercadoPagoCheckout.js';
+import mercadoPagoCheckoutRouter from './routers/mercadoPagoCheckout.js';
 import uploadRouter from './routers/uploadRouter.js';
 import path from 'path';
 
