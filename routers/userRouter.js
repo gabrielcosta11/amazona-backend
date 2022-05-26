@@ -9,7 +9,7 @@ import { generateToken, isAuth } from '../ultils.js';
 const userRouter = express.Router();
 
 userRouter.get('/seed', expressAsyncHandler(async(req, res) => {
-    // await User.remove({});
+    //await User.remove({});
     const createdUsers = await User.insertMany(data.users);
     res.send({createdUsers});
 }));

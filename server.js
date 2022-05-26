@@ -18,9 +18,11 @@ const dest = path.resolve(process.cwd(), 'tmp', 'uploads')
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
+mongoose.connect(process.env.MONGO_CNSTRING || 'mongodb://localhost/amazona', {
     useUnifiedTopology: true,
 });
+
+
 
 mercadopago.configure({
     access_token: "TEST-485675843605228-120220-2e278cb168bb9d475b7972bea2143b4e-1031482901",
