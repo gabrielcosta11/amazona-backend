@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import {MongoClient} from 'mongodb'
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 import freightCalcRouter from './routers/freightCalcRouter.js';
@@ -19,8 +20,29 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 mongoose.connect(process.env.MONGO_CNSTRING || 'mongodb://localhost/amazona', {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
 });
+
+
+/* const client = new MongoClient(process.env.MONGO_CNSTRING)
+
+async function listDatabases(client){
+    const databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
+try {
+    await client.connect()
+
+    await client.db("amazona").command({ ping: 1 });
+    console.log("Connected successfully to server");
+} catch (error) {
+    console.log(error)
+} */
+
 
 
 
